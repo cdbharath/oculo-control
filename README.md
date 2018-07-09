@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/me.jpeg" width="50%" >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/me.jpeg" width="50%" />
 </p>
 
 ### Objectives of the Project:
