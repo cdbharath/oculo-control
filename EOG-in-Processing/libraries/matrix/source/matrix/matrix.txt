@@ -1,0 +1,870 @@
+package matrixMath;
+
+public class matrixMath {
+    /**
+     * The x component of the vector.
+     */
+    public float x;
+    /**
+     * The y component of the vector.
+     */
+    public float y;
+    /**
+     * The z component of the vector.
+     */
+    public float z;
+    
+    public float give;
+    
+   
+    private float matrix[][];
+	private float length;
+    public int rows;
+    public int colm;
+     
+    /**
+     * Constructor for a 3D vector.
+     *
+     * @param  x_ the x coordinate.
+     * @param  y_ the y coordinate.
+     * @param  z_ the y coordinate.
+     */
+    
+    public matrixMath(float matrix_[][]) {
+        matrix = matrix_;
+        x = matrix[0][0]; y = matrix[0][1]; z = matrix[0][2];        
+    }
+    
+     
+	public void setNumber(int i, int j, float aa){
+    	matrix[i][j]=aa;
+	}    
+	public static float value;
+	
+	public float getNumber(int i, int j){
+		give = matrix[i][j];
+    	return give;
+	}  
+	
+	public static float row;
+	
+	public int sizeRow(){
+    	rows = matrix.length;
+    	colm = matrix[0].length;
+    	return rows;
+	}
+	public int sizeCol(){
+    	rows = matrix.length;
+    	colm = matrix[0].length;
+    	return colm;
+	}
+	public static float col;
+	
+	public float numberOfcol(matrixMath x){
+    	col = x.length;
+		return col;
+	}
+	
+    public matrixMath() {
+        x = 0f; y = 0f; z = 0f;
+    }
+
+ 
+    public matrixMath copy() {
+        return new matrixMath(matrix);
+    }
+
+    
+    
+    
+    
+	public static float newMatrix[][];    
+    
+    public matrixMath buildMatrx(int row, int col) {
+    	rows = row;
+    	colm = col;
+    	
+    	if(newMatrix==null)
+	 {
+		 newMatrix = new float[row][col];
+		 
+	 }
+    	
+    	for ( int c=0; c<row; c++ ){
+      		 for ( int d=0; d<col; d++ ){
+    	  								  				
+      			newMatrix[c][d] += 0;
+    	  			
+      		 }
+      	 }        
+    	return new matrixMath(newMatrix);
+    }    
+    
+    
+    
+    
+
+	/* -->> add function is for testing operations1*/
+	
+	public static float scalePoint[][];
+	public static float returnPoint[];
+	public static float returnPointTwo[][];	
+	      
+	    /* function for calculating local stiffness Matrix*/
+	    
+	    public static matrixMath scalePoint(matrixMath x,int scaleX, int scaleY, int scaleZ)
+	    {
+	    	
+	    	
+	    	
+	 if(scalePoint==null)
+	 {
+		 scalePoint = new float[x.sizeRow()][4];
+		 returnPoint = new float[4];		
+		 returnPointTwo = new float[4][4];
+		 
+	 }
+
+	 //set answere matrix to zero
+	 for ( int q=0; q<x.sizeRow(); q++ ){
+  	 for ( int a=0; a<4; a++ ){
+  	
+			scalePoint[q][a] = (float) (0.0);
+
+ 	 }
+  	 }
+  	 
+  	 
+  	returnPoint[0] = x.x;
+  	returnPoint[1] = x.y;
+  	returnPoint[2] = x.z;
+  	returnPoint[3] = 1;  
+  	
+  	returnPointTwo[0][0] = scaleX;
+  	returnPointTwo[0][1] = 0;  	
+  	returnPointTwo[0][2] = 0;
+  	returnPointTwo[0][3] = 0;
+  	returnPointTwo[1][0] = 0;
+  	returnPointTwo[1][1] = scaleY;  	
+  	returnPointTwo[1][2] = 0;
+  	returnPointTwo[1][3] = 0;
+  	returnPointTwo[2][0] = 0;
+  	returnPointTwo[2][1] = 0;  	
+  	returnPointTwo[2][2] = scaleZ;
+  	returnPointTwo[2][3] = 0;
+  	returnPointTwo[3][0] = 0;
+  	returnPointTwo[3][1] = 0;  	
+  	returnPointTwo[3][2] = 0;
+  	returnPointTwo[3][3] = 1;  	
+  	
+  	 //solve for multiplication matrix
+ 	 //solve for multiplication matrix
+ 	 for ( int w=0; w<x.sizeRow(); w++ ){
+ 		 
+		  		returnPoint[0] = x.getNumber(w,0);
+			  	returnPoint[1] = x.getNumber(w,1);
+			  	returnPoint[2] = x.getNumber(w,2);
+			  	returnPoint[3] = 1; 		 
+			  	
+ 		 for ( int c=0; c<4; c++ ){
+ 			 for ( int d=0; d<4; d++ ){
+ 				 						  							  	
+ 				 scalePoint[w][c] += (float) (returnPoint[d] * returnPointTwo[c][d]);
+  			
+ 			 }
+ 		 }	
+ 	 }	 
+  	 
+	 /* return multiplication matrix value
+	  * Function to be accessed by user from processing */
+	 
+  	return(new matrixMath(scalePoint));
+	    }    
+
+	    
+
+		/* -->> add function is for testing operations1*/
+		
+		public static float transPoint[][];
+		public static float returnAPoint[];
+		public static float returnAPointTwo[][];	
+		      
+		    /* function for calculating local stiffness Matrix*/
+		    
+		    public static matrixMath transPoint(matrixMath x,int transX, int transY, int transZ)
+		    {
+		    	
+		    	
+		 if(transPoint==null)
+		 {
+			 transPoint = new float[x.sizeRow()][4];
+			 returnAPoint = new float[4];		
+			 returnAPointTwo = new float[4][4];
+			 
+		 }
+
+		 //set answere matrix to zero	
+		 for ( int q=0; q<x.sizeRow(); q++ ){
+	  	 for ( int a=0; a<4; a++ ){
+	  	
+				transPoint[q][a] = (float) (0.0);
+
+	 	 }
+		    }
+	  	 
+	  	 
+	  	returnAPoint[0] = x.x;
+	  	returnAPoint[1] = x.y;
+	  	returnAPoint[2] = x.z;
+	  	returnAPoint[3] = 1;  
+	  	
+	  	returnAPointTwo[0][0] = 1;
+	  	returnAPointTwo[0][1] = 0;  	
+	  	returnAPointTwo[0][2] = 0;
+	  	returnAPointTwo[0][3] = transX;
+	  	returnAPointTwo[1][0] = 0;
+	  	returnAPointTwo[1][1] = 1;  	
+	  	returnAPointTwo[1][2] = 0;
+	  	returnAPointTwo[1][3] = transY;
+	  	returnAPointTwo[2][0] = 0;
+	  	returnAPointTwo[2][1] = 0;  	
+	  	returnAPointTwo[2][2] = 1;
+	  	returnAPointTwo[2][3] = transZ;
+	  	returnAPointTwo[3][0] = 0;
+	  	returnAPointTwo[3][1] = 0;  	
+	  	returnAPointTwo[3][2] = 0;
+	  	returnAPointTwo[3][3] = 1;  	
+	  	
+	  	 //solve for multiplication matrix
+	 	 for ( int w=0; w<x.sizeRow(); w++ ){
+	 		 
+		  		returnPoint[0] = x.getNumber(w,0);
+			  	returnPoint[1] = x.getNumber(w,1);
+			  	returnPoint[2] = x.getNumber(w,2);
+			  	returnPoint[3] = 1; 	  	
+	  	
+	  	 for ( int c=0; c<4; c++ ){
+	  		 for ( int d=0; d<4; d++ ){
+		  								  				
+	  			transPoint[w][c] += (float) (returnAPoint[d] * returnAPointTwo[c][d]);
+		  			
+	  		 }
+	  	 }	 
+	 	 }
+		 /* return multiplication matrix value
+		  * Function to be accessed by user from processing */
+		 
+	  	return(new matrixMath(transPoint));
+		    }    	    
+	    
+
+		    
+
+
+			/* -->> add function is for testing operations1*/
+			
+			public static float shearXPoint[][];
+			public static float returnBPoint[];
+			public static float returnBPointTwo[][];	
+			      
+			    /* function for calculating local stiffness Matrix*/
+			    
+			    public static matrixMath shearPoint(matrixMath x,int shearX, int shearY, int shearZ)
+			    {
+			    	
+			    	
+			 if(shearXPoint==null)
+			 {
+				 shearXPoint = new float[x.sizeRow()][4];
+				 returnBPoint = new float[4];		
+				 returnBPointTwo = new float[4][4];
+				 
+			 }
+
+			 //set answere matrix to zero	
+			 for ( int q=0; q<x.sizeRow(); q++ ){			 
+		  	 for ( int a=0; a<4; a++ ){
+		  	
+					shearXPoint[q][a] = (float) (0.0);
+
+		 	 }
+		  	 
+			 }
+			 
+		  	returnBPoint[0] = x.x;
+		  	returnBPoint[1] = x.y;
+		  	returnBPoint[2] = x.z;
+		  	returnBPoint[3] = 1;  
+		  	
+		  	returnBPointTwo[0][0] = 1;
+		  	returnBPointTwo[0][1] = shearX;  	
+		  	returnBPointTwo[0][2] = shearX;
+		  	returnBPointTwo[0][3] = 0;
+		  	returnBPointTwo[1][0] = shearY;
+		  	returnBPointTwo[1][1] = 1;  	
+		  	returnBPointTwo[1][2] = shearY;
+		  	returnBPointTwo[1][3] = 0;
+		  	returnBPointTwo[2][0] = shearZ;
+		  	returnBPointTwo[2][1] = shearZ;  	
+		  	returnBPointTwo[2][2] = 1;
+		  	returnBPointTwo[2][3] = 0;
+		  	returnBPointTwo[3][0] = 0;
+		  	returnBPointTwo[3][1] = 0;  	
+		  	returnBPointTwo[3][2] = 0;
+		  	returnBPointTwo[3][3] = 1;  	
+		  	
+		  	 //solve for multiplication matrix
+		  	
+		 	 for ( int w=0; w<x.sizeRow(); w++ ){
+		 		 
+			  		returnPoint[0] = x.getNumber(w,0);
+				  	returnPoint[1] = x.getNumber(w,1);
+				  	returnPoint[2] = x.getNumber(w,2);
+				  	returnPoint[3] = 1; 		  	
+		  	 for ( int c=0; c<4; c++ ){
+		  		 for ( int d=0; d<4; d++ ){
+			  								  				
+		  			shearXPoint[0][c] += (float) (returnBPoint[d] * returnBPointTwo[c][d]);
+			  			
+		  		 }
+		  	 }	 
+		 	 }
+			 /* return multiplication matrix value
+			  * Function to be accessed by user from processing */
+			 
+		  	return(new matrixMath(shearXPoint));
+			    }    	    
+		    
+		    
+
+			    
+				/* -->> add function is for testing operations1*/
+				
+				public static float rotateXPoint[][];
+				public static float returnDPoint[];
+				public static float returnDPointTwo[][];	
+				      
+				    /* function for calculating local stiffness Matrix*/
+				    
+				    public static matrixMath rotateXPoint(matrixMath x,int rotX)
+				    {
+				    	
+				    	
+				 if(rotateXPoint==null)
+				 {
+					 rotateXPoint = new float[x.sizeRow()][4];
+					 returnDPoint = new float[4];		
+					 returnDPointTwo = new float[4][4];
+					 
+				 }
+
+				 //set answere matrix to zero	
+				 for ( int q=0; q<x.sizeRow(); q++ ){			 
+			  	 for ( int a=0; a<4; a++ ){
+			  	
+			  		rotateXPoint[q][a] = (float) (0.0);
+
+			 	 }
+			  	 
+				 }
+				 
+			  	returnDPoint[0] = x.x;
+			  	returnDPoint[1] = x.y;
+			  	returnDPoint[2] = x.z;
+			  	returnDPoint[3] = 1;  
+			  	
+			  	returnDPointTwo[0][0] = 1;
+			  	returnDPointTwo[0][1] = (float) Math.cos(rotX);  	
+			  	returnDPointTwo[0][2] = (float) (Math.sin(rotX))*-1;
+			  	returnDPointTwo[0][3] = 0;
+			  	returnDPointTwo[1][0] = 0;
+			  	returnDPointTwo[1][1] = (float) Math.sin(rotX);;  	
+			  	returnDPointTwo[1][2] = (float) Math.cos(rotX);;
+			  	returnDPointTwo[1][3] = 0;
+			  	returnDPointTwo[2][0] = 0;
+			  	returnDPointTwo[2][1] = 0;  	
+			  	returnDPointTwo[2][2] = 1;
+			  	returnDPointTwo[2][3] = 0;
+			  	returnDPointTwo[3][0] = 0;
+			  	returnDPointTwo[3][1] = 0;  	
+			  	returnDPointTwo[3][2] = 0;
+			  	returnDPointTwo[3][3] = 1;  	
+			  	
+			  	 //solve for multiplication matrix
+			  	
+			 	 for ( int w=0; w<x.sizeRow(); w++ ){
+			 		 
+				  		returnDPoint[0] = x.getNumber(w,0);
+					  	returnDPoint[1] = x.getNumber(w,1);
+					  	returnDPoint[2] = x.getNumber(w,2);
+					  	returnDPoint[3] = 1; 
+					  	
+			  	 for ( int c=0; c<4; c++ ){
+			  		 for ( int d=0; d<4; d++ ){
+				  								  				
+			  			rotateXPoint[0][c] += (float) (returnDPoint[d] * returnDPointTwo[c][d]);
+				  			
+			  		 }
+			  	 }	 
+			 	 }
+				 /* return multiplication matrix value
+				  * Function to be accessed by user from processing */
+				 
+			  	return(new matrixMath(rotateXPoint));
+				    }    	    
+			    
+					    
+					/* -->> add function is for testing operations1*/
+					
+					public static float rotateYPoint[][];
+					public static float returnEPoint[];
+					public static float returnEPointTwo[][];	
+					      
+					    /* function for calculating local stiffness Matrix*/
+					    
+					    public static matrixMath rotateYPoint(matrixMath x,int rotY)
+					    {
+					    	
+					    	
+					 if(rotateYPoint==null)
+					 {
+						 rotateYPoint = new float[x.sizeRow()][4];
+						 returnEPoint = new float[4];		
+						 returnEPointTwo = new float[4][4];
+						 
+					 }
+
+					 //set answere matrix to zero	
+					 for ( int q=0; q<x.sizeRow(); q++ ){			 
+				  	 for ( int a=0; a<4; a++ ){
+				  	
+				  		rotateYPoint[q][a] = (float) (0.0);
+
+				 	 }
+				  	 
+					 }
+					 
+				  	returnEPoint[0] = x.x;
+				  	returnEPoint[1] = x.y;
+				  	returnEPoint[2] = x.z;
+				  	returnEPoint[3] = 1;  
+				  	
+				  	returnEPointTwo[0][0] = (float) Math.cos(rotY);
+				  	returnEPointTwo[0][1] = 0;  	
+				  	returnEPointTwo[0][2] = (float) (Math.sin(rotY));
+				  	returnEPointTwo[0][3] = 0;
+				  	returnEPointTwo[1][0] = 0;
+				  	returnEPointTwo[1][1] = 1;  	
+				  	returnEPointTwo[1][2] = 0;
+				  	returnEPointTwo[1][3] = 0;
+				  	returnEPointTwo[2][0] = (float) (Math.sin(rotY))*-1;
+				  	returnEPointTwo[2][1] = 0;  	
+				  	returnEPointTwo[2][2] = (float) Math.cos(rotY);
+				  	returnEPointTwo[2][3] = 0;
+				  	returnEPointTwo[3][0] = 0;
+				  	returnEPointTwo[3][1] = 0;  	
+				  	returnEPointTwo[3][2] = 0;
+				  	returnEPointTwo[3][3] = 1;  	
+				  	
+				  	 //solve for multiplication matrix
+				  	
+				 	 for ( int w=0; w<x.sizeRow(); w++ ){
+				 		 
+					  		returnEPoint[0] = x.getNumber(w,0);
+						  	returnEPoint[1] = x.getNumber(w,1);
+						  	returnEPoint[2] = x.getNumber(w,2);
+						  	returnEPoint[3] = 1; 
+						  	
+				  	 for ( int c=0; c<4; c++ ){
+				  		 for ( int d=0; d<4; d++ ){
+					  								  				
+				  			rotateYPoint[0][c] += (float) (returnEPoint[d] * returnEPointTwo[c][d]);
+					  			
+				  		 }
+				  	 }	 
+				 	 }
+					 /* return multiplication matrix value
+					  * Function to be accessed by user from processing */
+					 
+				  	return(new matrixMath(rotateYPoint));
+					    }   			    
+			    
+			    
+						/* -->> add function is for testing operations1*/
+						
+						public static float rotateZPoint[][];
+						public static float returnFPoint[];
+						public static float returnFPointTwo[][];	
+						      
+						    /* function for calculating local stiffness Matrix*/
+						    
+						    public static matrixMath rotateZPoint(matrixMath x,int rotZ)
+						    {
+						    	
+						    	
+						 if(rotateYPoint==null)
+						 {
+							 rotateZPoint = new float[x.sizeRow()][4];
+							 returnFPoint = new float[4];		
+							 returnFPointTwo = new float[4][4];
+							 
+						 }
+
+						 //set answere matrix to zero	
+						 for ( int q=0; q<x.sizeRow(); q++ ){			 
+					  	 for ( int a=0; a<4; a++ ){
+					  	
+					  		rotateZPoint[q][a] = (float) (0.0);
+
+					 	 }
+					  	 
+						 }
+						 
+					  	returnFPoint[0] = x.x;
+					  	returnFPoint[1] = x.y;
+					  	returnFPoint[2] = x.z;
+					  	returnFPoint[3] = 1;  
+					  	
+					  	returnFPointTwo[0][0] = (float) Math.cos(rotZ);
+					  	returnFPointTwo[0][1] = (float) (Math.sin(rotZ));  	
+					  	returnFPointTwo[0][2] = 0;
+					  	returnFPointTwo[0][3] = 0;
+					  	returnFPointTwo[1][0] = (float) (Math.sin(rotZ))*-1;
+					  	returnFPointTwo[1][1] = (float) Math.cos(rotZ);  	
+					  	returnFPointTwo[1][2] = 0;
+					  	returnFPointTwo[1][3] = 0;
+					  	returnFPointTwo[2][0] = 0;
+					  	returnFPointTwo[2][1] = 0;  	
+					  	returnFPointTwo[2][2] = 1;
+					  	returnFPointTwo[2][3] = 0;
+					  	returnFPointTwo[3][0] = 0;
+					  	returnFPointTwo[3][1] = 0;  	
+					  	returnFPointTwo[3][2] = 0;
+					  	returnFPointTwo[3][3] = 1;  	
+					  	
+					  	 //solve for multiplication matrix
+					  	
+					 	 for ( int w=0; w<x.sizeRow(); w++ ){
+					 		 
+						  		returnFPoint[0] = x.getNumber(w,0);
+							  	returnFPoint[1] = x.getNumber(w,1);
+							  	returnFPoint[2] = x.getNumber(w,2);
+							  	returnFPoint[3] = 1; 
+							  	
+					  	 for ( int c=0; c<4; c++ ){
+					  		 for ( int d=0; d<4; d++ ){
+						  								  				
+					  			rotateZPoint[0][c] += (float) (returnFPoint[d] * returnFPointTwo[c][d]);
+						  			
+					  		 }
+					  	 }	 
+					 	 }
+						 /* return multiplication matrix value
+						  * Function to be accessed by user from processing */
+						 
+					  	return(new matrixMath(rotateZPoint));
+						    }   			    
+				    
+					    
+    
+	/* -->> add function is for testing operations1*/
+	
+	public static float identity[][];
+	      
+	    /* function for calculating local stiffness Matrix*/
+	    
+	    public static matrixMath identityMatrix(int matrixSize)
+	    {
+	    	
+	/* -->>    arr[1][1] = a+b;  arr hasn't been initialised, 
+	 * you're accessing [1][1] when the array is null. Also, 
+	 * you probably want 0, not 1, since arrays are 0-index */
+	    	
+	 if(identity==null)
+	 {
+	   identity=new float[matrixSize][matrixSize];
+	 }
+
+  	 for ( int a=0; a<matrixSize; a++ ){
+  		 for ( int b=0; b<matrixSize; b++ ){
+  		 
+  			 if (a==b){
+  				 identity[a][b] = (float) (1.0);
+  			}
+  			 if (a!=b){
+  				 identity[a][b] = (float) (0.0);
+  			}
+  		 }
+  	 }
+	 /* return itentity matrix value
+	  * Function to be accessed by user from processing */
+	 
+	return (new matrixMath(identity));
+	    }
+
+
+ 
+		/* -->> add function is for testing operations1*/
+		
+		public static float transpose[][];
+		      
+		    /* function for calculating local stiffness Matrix*/
+		    
+		    public static matrixMath transposeMatrix(matrixMath matrixA)
+		    {
+		    	
+		    	
+		 if(transpose==null)
+		 {
+			 transpose=new float[matrixA.sizeRow()][matrixA.sizeCol()];
+		 }
+
+		 //set answere matrix to zero	
+	  	 for ( int a=0; a<matrixA.sizeRow(); a++ ){
+	  		 for ( int b=0; b<matrixA.sizeCol(); b++ ){
+	  	
+	  			transpose[a][b] = (float) (0.0);
+	  			
+	  		 }
+	  	 }
+	  	 
+	  	 //solve for multiplication matrix
+	  	 for ( int c=0; c<matrixA.sizeRow(); c++ ){
+	  		 for ( int d=0; d<matrixA.sizeCol(); d++ ){
+	  			 	
+
+	  				
+	  			transpose[c][d] += (float) (matrixA.getNumber(d,c));
+	  				
+	  			
+	  		 }
+	  	 }	 
+	  	 
+		 /* return multiplication matrix value
+		  * Function to be accessed by user from processing */
+		 
+		return (new matrixMath(transpose));
+		    }	    
+	    
+	    
+	    
+
+		/* -->> add function is for testing operations1*/
+		
+		public static float multiply[][];
+		      
+		    /* function for calculating local stiffness Matrix*/
+		    
+		    public static matrixMath multiplySquareMatrix(matrixMath matrixA, matrixMath matrixB)
+		    {
+		    	
+		    	
+		 if(multiply==null)
+		 {
+			 multiply=new float[matrixA.sizeRow()][matrixA.sizeCol()];
+		 }
+
+		 //set answere matrix to zero	
+	  	 for ( int a=0; a<matrixA.sizeRow(); a++ ){
+	  		 for ( int b=0; b<matrixA.sizeCol(); b++ ){
+	  	
+	  				multiply[a][b] = (float) (0.0);
+	  			
+	  		 }
+	  	 }
+	  	 
+	  	 //solve for multiplication matrix
+	  	 for ( int c=0; c<matrixA.sizeRow(); c++ ){
+	  		 for ( int d=0; d<matrixA.sizeCol(); d++ ){
+	  			 	
+	  			for ( int i=0; i<matrixA.sizeCol(); i++ ){
+	  				
+	  				multiply[c][d] += (float) (matrixA.getNumber(c,i) * matrixB.getNumber(i,d));
+	  				
+	  			}
+	  		 }
+	  	 }	 
+	  	 
+		 /* return multiplication matrix value
+		  * Function to be accessed by user from processing */
+		 
+		return (new matrixMath(multiply));
+		    }
+
+		    
+		    
+		    
+			/* -->> add function is for testing operations1*/
+			
+			public static float add[][];
+			      
+			    /* function for calculating local stiffness Matrix*/
+			    
+			    public static matrixMath addSquareMatrix(matrixMath matrixA, matrixMath matrixB)
+			    {
+			    	
+			    	
+			 if(add==null)
+			 {
+				 add=new float[matrixA.sizeRow()][matrixA.sizeCol()];
+			 }
+
+			 //set answere matrix to zero	
+		  	 for ( int a=0; a<matrixA.sizeRow(); a++ ){
+		  		 for ( int b=0; b<matrixA.sizeCol(); b++ ){
+		  	
+		  			add[a][b] = (float) (0.0);
+		  			
+		  		 }
+		  	 }
+		  	 
+		  	 //solve for multiplication matrix
+		  	 for ( int c=0; c<matrixA.sizeRow(); c++ ){
+		  		 for ( int d=0; d<matrixA.sizeCol(); d++ ){
+		  			 	
+	
+		  				
+		  				add[c][d] += (float) (matrixA.getNumber(c,d) + matrixB.getNumber(c,d));
+		  				
+		  			
+		  		 }
+		  	 }	 
+		  	 
+			 /* return multiplication matrix value
+			  * Function to be accessed by user from processing */
+			 
+			return (new matrixMath(add));
+			    }
+	    
+			    
+			    
+			    
+				/* -->> add function is for testing operations1*/
+				
+				public static float subtract[][];
+				      
+				    /* function for calculating local stiffness Matrix*/
+				    
+				    public static matrixMath subtractSquareMatrix(matrixMath matrixA, matrixMath matrixB)
+				    {
+				    	
+				    	
+				 if(subtract==null)
+				 {
+					 subtract=new float[matrixA.sizeRow()][matrixA.sizeCol()];
+				 }
+
+				 //set answere matrix to zero	
+			  	 for ( int a=0; a<matrixA.sizeRow(); a++ ){
+			  		 for ( int b=0; b<matrixA.sizeCol(); b++ ){
+			  	
+			  			subtract[a][b] = (float) (0.0);
+			  			
+			  		 }
+			  	 }
+			  	 
+			  	 //solve for multiplication matrix
+			  	 for ( int c=0; c<matrixA.sizeRow(); c++ ){
+			  		 for ( int d=0; d<matrixA.sizeCol(); d++ ){			  			 			
+			  				
+			  			subtract[c][d] += (float) (matrixA.getNumber(c,d) - matrixB.getNumber(c,d));
+			  							  			
+			  		 }
+			  	 }	 
+			  	 
+				 /* return multiplication matrix value
+				  * Function to be accessed by user from processing */
+				 
+				return (new matrixMath(subtract));
+				    }			    
+			    
+			    
+	    
+				    
+				    
+				    
+					/* -->> add function is for testing operations1*/
+					
+					public static float scale[][];
+					      
+					    /* function for calculating local stiffness Matrix*/
+					    
+					    public static matrixMath scaleSquareMatrix(matrixMath matrixA, matrixMath matrixB,int scaleFactor)
+					    {
+					    	
+					    	
+					 if(scale==null)
+					 {
+						 scale=new float[matrixA.sizeRow()][matrixA.sizeCol()];
+					 }
+
+					 //set answere matrix to zero	
+				  	 for ( int a=0; a<matrixA.sizeRow(); a++ ){
+				  		 for ( int b=0; b<matrixA.sizeCol(); b++ ){
+				  	
+				  			scale[a][b] = (float) (0.0);
+				  			
+				  		 }
+				  	 }
+				  	 
+				  	 //solve for multiplication matrix
+				  	 for ( int c=0; c<matrixA.sizeRow(); c++ ){
+				  		 for ( int d=0; d<matrixA.sizeCol(); d++ ){			  			 			
+				  				
+				  			scale[c][d] += (float) (matrixA.getNumber(c,d) * scaleFactor);
+				  							  			
+				  		 }
+				  	 }	 
+				  	 
+					 /* return multiplication matrix value
+					  * Function to be accessed by user from processing */
+					 
+					return (new matrixMath(scale));
+					    }				    
+
+					    
+					    
+					    
+						/* -->> add function is for testing operations1*/
+						
+						public static float columnmultiply[][];
+						      
+						    /* function for calculating local stiffness Matrix*/
+						    
+						    public static matrixMath columnMultiplyMatrix(float matrixA[],matrixMath matrixB)
+						    {
+						    	
+						    	
+						 if(columnmultiply==null)
+						 {
+							 columnmultiply=new float[1][matrixB.sizeCol()];
+						 }
+
+						 //set answere matrix to zero	
+					  	 for ( int a=0; a<matrixB.sizeRow(); a++ ){
+					  		 for ( int b=0; b<matrixB.sizeCol(); b++ ){
+					  	
+					  			columnmultiply[0][a] = (float) (0.0);
+					  			
+					  		 }
+					  	 }
+					  	 
+					  	 //solve for multiplication matrix
+					  	 for ( int c=0; c<matrixB.sizeRow(); c++ ){
+					  		 for ( int d=0; d<matrixB.sizeCol(); d++ ){
+						  								  				
+						  				columnmultiply[0][c] += (float) (matrixA[d] * matrixB.getNumber(c,d));
+						  			
+					  		 }
+					  	 }	 
+					  	 
+						 /* return multiplication matrix value
+						  * Function to be accessed by user from processing */
+						 
+						return (new matrixMath(columnmultiply));
+						    }
+						    
+
+
+				    
+}
