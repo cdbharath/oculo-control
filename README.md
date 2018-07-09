@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/me.jpeg" width="50%" height="50%" >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/me.jpeg" width="50%" height="50%" >
 </p>
 
 ### Objectives of the Project:
@@ -35,7 +35,7 @@ The baud rate is set to 115200 so that the speed of data transfer becomes 115200
 The placement of electrodes is important in EOG signal acquisition. The point of forehead is taken as reference, where there is very less electrical activity. Two electrodes are placed above and below an eye, and the other two are placed right of the right eye and left of the left eye. The iris has abundant electrons to create electrical activity during eye movements. This is the crux of EOG.
 
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/electrode.jpg" >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/electrode.jpg" >
   Electrode placement
 </p>
 
@@ -75,7 +75,7 @@ When the SRB pins are disabled, each channel pins can be used as differential in
 Connecting electrodes to ADS1299
 
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/ADS1299.png" >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/ADS1299.png" >
 </p>
 
 
@@ -107,7 +107,7 @@ After the second byte is received, the channel loop is manipulated with respect 
 After this, every 4 bytes of data is acquired and saved in a list array with row number as the channel number. This way 36 bytes for 8 channels are received and save in list array of size 8 rows x 4 columns. The bytes are decoded first. Then the 4 bytes from each channel is converted to 32 bit signed integer. This integer is in 2s complement, so that we can store and transfer negative values too. We convert the 2s complement back to integer. This value is further converted to micro volts by multiplying with the scaling factor. The scaling factor is as follows.
 
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/factor.jpg" >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/factor.jpg" >
 </p>
 
 Finally the script waits for the STOP BYTE, if the STOP BYTE is equal to 0xc0, the Data packet is valid, else its invalid.
@@ -132,7 +132,7 @@ For disabling channels we send data (1 to 8) serially to Arduino to disable the 
 Output when openbci_lsl.py is executed:
 
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/GUI.jpg" >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/GUI.jpg" >
   The Graphical User Interface
 </p>
 
@@ -140,7 +140,7 @@ The GUI contains options to change the port, if we are using multiple Arduino. U
 Output when openbci_lsl.py –stream is used:
 
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/1.png" >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/1.png" >
   Command prompt user interface
 </p>
 
@@ -152,19 +152,19 @@ The basic information is printed in the screen. From the output we have a list a
 ### Output:
 
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/right.png"  >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/right.png"  >
   Eye to right
 </p>
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/left.png"  >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/left.png"  >
   Eye to left
 </p>
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/bottom.png"  >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/bottom.png"  >
   Eye to bottom
 </p>
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/top.png"  >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/top.png"  >
   Eye to top
 </p>
 
@@ -203,7 +203,7 @@ Then the output is pooled and the output data is normalized. The resultant is se
 The output of the classifier is used to control the turtle to navigate the maze given below. The objective is to find a way out of the maze using eye movement. This can be developed to eye-movement based keyboard and many other applications.
 
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/maze.jpg" >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/maze.jpg" >
   The maze game
 </p>
 
@@ -227,13 +227,13 @@ Different stages of the circuit:
 
 
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/2.jpg"  >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/2.jpg"  >
   AD620 Instrumentation Amplifier
 </p>
 
 
 <p align="center">
-  <img src="https://github.com/bharath7kumar/Oculo-control/images/3.jpg"  >
+  <img src="https://github.com/bharath7kumar/Oculo-control/tree/master/images/3.jpg"  >
   Rest of the signal processing circuit
 </p>
 
