@@ -140,7 +140,7 @@ The GUI contains options to change the port, if we are using multiple Arduino. U
 Output when openbci_lsl.py –stream is used:
 
 <p align="center">
-  <img src="images/1.png" >
+  <img src="images/1.jpg" >
   Command prompt user interface
 </p>
 
@@ -152,7 +152,7 @@ The basic information is printed in the screen. From the output we have a list a
 ### Output:
 
 <p align="center">
-  <img src="images/right.png"  >
+  <img src="images/right.jpg"  >
   Eye to right
 </p>
 <p align="center">
@@ -160,11 +160,11 @@ The basic information is printed in the screen. From the output we have a list a
   Eye to left
 </p>
 <p align="center">
-  <img src="images/bottom.png"  >
+  <img src="images/bottom.jpg"  >
   Eye to bottom
 </p>
 <p align="center">
-  <img src="images/top.png"  >
+  <img src="images/top.jpg"  >
   Eye to top
 </p>
 
