@@ -115,7 +115,7 @@ Finally the script waits for the STOP BYTE, if the STOP BYTE is equal to 0xc0, t
 
 ### User Interface:
 
-There are 4 scripts written to acquire and display the signals. To run the user interface openbci_lsl.py is to be run. Python openbci_lsl.py command should be used in command prompt to open GUI (Graphical User Interface) or Python openbci_lsl.py –stream command should be used to just run the script in command prompt and print the channel outputs.
+There are 4 scripts written to acquire and display the signals. These scripts are derived and developed from OpenBCI opensouce scripts. To run the user interface openbci_lsl.py is to be run. Python openbci_lsl.py command should be used in command prompt to open GUI (Graphical User Interface) or Python openbci_lsl.py –stream command should be used to just run the script in command prompt and print the channel outputs.
 
 Running the script will call streamerlsl.py python script. This script will in turn call open_bci_v3.py , allowing the script to find the port to which Arduino is connected.
 
@@ -195,7 +195,7 @@ RNN :
 
 The algorithm is implemented totally using Keras, tensorflow backend. The data should be pre processed accordingly. The model used here is sequential model. The features are the outputs amplitude from the two channels. The output is passes through embedding and convolution layer.
 
-Then the output is pooled and the output data is normalized. The resultant is sent to LSTM layer and made dense to give an output. Only algorithm is made, yet to be tested.
+Then the output is pooled and the output data is normalized. The resultant is sent to LSTM layer and made dense to give an output. 
 
 
 ### Application:
